@@ -2,7 +2,9 @@
   <div class="notes">
 
     <AddEditNote
-      v-model="newNote.content"
+      v-model:content="newNote.content"
+      v-model:title="newNote.title"
+      v-model:writer="newNote.writer"
       placeholder="Add a new note"
       ref="addEditNoteRef"
     >
@@ -45,23 +47,28 @@
   import AddEditNote from '@/components/Notes/AddEditNote.vue'
   import { useStoreNotes } from '@/stores/storeNotes'
   import { useWatchCharacters } from '@/use/useWatchCharacters'
+  // import { onMounted } from 'vue'
+
+const storeNotes = useStoreNotes()
+// onMounted(() => {
+//   storeNotes.getNotes_subscribe()
+// })
 
 /*
   store
 */
 
-  const storeNotes = useStoreNotes()
 
 /*
   notes
 */
 
-const newNote = ref({content:''})
+const newNote = ref({content:'',title:'',writer:''})
   const addEditNoteRef = ref(null)
 
   const addNote = () => {
     storeNotes.addNote(newNote.value)
-    newNote.value.content = ''
+    newNote.value = {content:'',title:'',writer:''}
     addEditNoteRef.value.focusTextarea()
   }
 
@@ -69,6 +76,6 @@ const newNote = ref({content:''})
   watch characters
 */
 
-  useWatchCharacters(newNote.value.content)
+  useWatchCharacters(()=>newNote.value.content)
 
 </script>

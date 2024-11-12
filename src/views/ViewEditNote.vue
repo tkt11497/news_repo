@@ -1,7 +1,9 @@
 <template>
   <div class="edit-note">
     <AddEditNote
-      v-model="noteContent.content"
+      v-model:content="noteContent.content"
+      v-model:title="noteContent.title"
+      v-model:writer="noteContent.writer"
       bgColor="link"
       placeholder="Edit note"
       label="Edit Note"
@@ -55,7 +57,7 @@
   note
 */
 
-  const noteContent = ref({content:''})
+  const noteContent = ref({content:'',title:'',writer:''})
   const {notes}= storeToRefs(storeNotes)
   const getNote_reload = async ()=>{
     if(notes.value.length === 0){
@@ -79,7 +81,7 @@
 
   const handleSaveClicked = () => {
     storeNotes.updateNote(route.params.id, noteContent.value)
-    router.push('/')
+    //router.push('/')
   }
 
 </script>

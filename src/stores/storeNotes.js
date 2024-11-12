@@ -6,6 +6,7 @@ import { db } from '@/js/firebase'
 const notesCollection = collection(db, "notes")
 // const notesQuery = query(notesCollection, orderBy("date"), limit(3));
 const notesQuery = query(notesCollection, orderBy("date","desc"));
+let unsubscribe=null
 export const useStoreNotes = defineStore('storeNotes', {
   state: () => {
     return { 
@@ -18,7 +19,7 @@ export const useStoreNotes = defineStore('storeNotes', {
   actions: {
     async getNotes_reload() {
       let notes1 = []
-      const querySnapshot = await getDocs(collection(db, "notes"));
+      const querySnapshot = await getDocs(notesCollection);
       querySnapshot.forEach((doc) => {
         let note={
           id: doc.id,
@@ -31,7 +32,10 @@ export const useStoreNotes = defineStore('storeNotes', {
     },
     async getNotes_subscribe() {  
       this.notesloading = true
-      const unsub = onSnapshot(notesQuery, (querySnapshot) => {
+      if(unsubscribe) {
+        unsubscribe()
+      }
+      unsubscribe = onSnapshot(notesQuery, (querySnapshot) => {
         let notes = []
         querySnapshot.forEach((doc) => {
             let note={
@@ -42,8 +46,11 @@ export const useStoreNotes = defineStore('storeNotes', {
         });
         this.notes = notes
         this.notesloading = false
+      },(error)=>{
+        console.log(error.message)
+        this.notesloading = false
       });
-      return unsub
+      //return unsubscribe
     },
     async addNote(newNoteContent) {
       let currentDate = new Date().getTime()
@@ -62,11 +69,22 @@ export const useStoreNotes = defineStore('storeNotes', {
     async updateNote(id_param, content) {
       // Set the "capital" field of the city 'DC'
       const { id, ...noteWithoutId } = content;
-        await updateDoc(doc(db, "notes", id_param), {
+        await updateDoc(doc(notesCollection, id_param), {
           // content: content.content,
           // username: content.username only specified field will be updated in fire store
           ...noteWithoutId
+        }).then(() => {
+          console.log('update success')
+          this.router.push('/')
+        }).catch((error) => {
+          console.log(error.message)
         });
+    },
+     clearNotes() {
+      if(unsubscribe) {
+        unsubscribe()
+      }
+      this.notes = []
     }
   },
   getters: {

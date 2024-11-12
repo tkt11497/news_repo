@@ -10,13 +10,13 @@
 /*
   imports
 */
-import { useStoreNotes } from '@/stores/storeNotes'
+// import { useStoreNotes } from '@/stores/storeNotes'
+import { useStoreAuth } from '@/stores/storeAuth'
 import NavBar from '@/components/Layout/NavBar.vue'
 import { onMounted } from 'vue'
-
-const storeNotes = useStoreNotes()
+const storeAuth = useStoreAuth()
 onMounted(() => {
-  storeNotes.getNotes_subscribe()
+  storeAuth.init()
 })
 </script>
 

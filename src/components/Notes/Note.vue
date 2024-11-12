@@ -4,7 +4,9 @@
   >
     <div class="card-content">
       <div class="content">
-        {{ note.content }}
+       <p>Title: {{ note.title }}</p>
+       <p>Writer: {{ note.writer }}</p>
+       <p>Content: {{ note.content }}</p>
         <div class="columns is-mobile has-text-grey-light mt-2">
           <small class="column">{{ formattedDate }}</small>
           <small class="column has-text-right">{{ characterLength }}</small>

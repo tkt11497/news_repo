@@ -25,12 +25,16 @@
             <div class="field">
                 <label class="label">Password</label>
             <div class="control">
-                <input class="input" type="password" v-model="form.password" placeholder="Enter your password">
+                <input class="input" type="password" 
+                    v-model="form.password" 
+                    minlength="6" 
+                    placeholder="Enter your password">
                 </div>
             </div>
             <div class="field is-grouped">
                 <p class="control">
-                <button class="button is-primary">
+                <button class="button is-primary" 
+                    :disabled="!form.email || !form.password || loading">
                     {{ register ? 'Register' : 'Login' }}
                 </button>
                 </p>
@@ -43,20 +47,28 @@
 </template>
 <script setup>
 import { ref, reactive } from 'vue'
+import { useStoreAuth } from '@/stores/storeAuth'
+const storeAuth = useStoreAuth()
 const register = ref(false)
 const form = reactive({
     email: '',
     password: ''
 })
+const loading = ref(false)
 const handleSubmit = () => {
+    loading.value = true
     if(!form.email || !form.password) {
         alert('Please enter email and password')
         return
     }else {
         if(register.value) {
-            console.log('register')
+            storeAuth.register(form.email, form.password).then(() => {
+                loading.value = false
+            })
         }else {
-            console.log('login')
+            storeAuth.login(form.email, form.password).then(() => {
+                loading.value = false
+            })
         }
     }
 }

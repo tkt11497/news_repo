@@ -34,8 +34,16 @@
       >
         <div class="navbar-start">
           <button 
+            v-if="storeAuth.user.id"
+            @click="logout"
             class="button is-small is-info mt-3 ml-3">
-            Logout
+            Logout {{ storeAuth.user.email }}
+          </button>
+          <button 
+            v-else
+            @click="$router.push('/auth')"
+            class="button is-small is-info mt-3 ml-3">
+            Login
           </button>
         </div>
         <div class="navbar-end">
@@ -62,6 +70,8 @@
 </template>
 
 <script setup>
+import { useStoreAuth } from '@/stores/storeAuth'
+const storeAuth = useStoreAuth()
 /*
   imports
 */
@@ -81,6 +91,11 @@
 
   const navbarMenuRef = ref(null)
   const navbarBurgerRef = ref(null)
+
+  const logout = () => {
+    showMobileNav.value = false
+    storeAuth.logout()
+  }
 
   onClickOutside(navbarMenuRef, () => {
     showMobileNav.value = false

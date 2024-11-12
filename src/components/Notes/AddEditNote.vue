@@ -12,13 +12,14 @@
 
     <div class="field">
       <div class="control">
+        <input class="input my-input" type="text" placeholder="news title" v-model="title">
+        <input class="input my-input" type="text" placeholder="news writer name" v-model="writer">
         <textarea
-          v-model="modelValue"
-          @input="$emit('update:modelValue', modelValue)"
+          v-model="content"
           class="textarea"
           :placeholder="placeholder"
           ref="textareaRef"
-          maxlength="100"
+          maxlength="200"
           v-autofocus
         />
       </div>
@@ -35,6 +36,7 @@
 <script setup>
 
 /*
+@input="$emit('update:modelValue', modelValue)"
   imports
 */
 
@@ -44,12 +46,14 @@
 /*
   props
 */
-
+  const content = defineModel('content', { required: true })
+  const title = defineModel('title', { required: true })
+  const writer = defineModel('writer', { required: true })
   const props = defineProps({
-    modelValue: {
-      type: String,
-      required: true
-    },
+    // modelValue: {
+    //   type: String,
+    //   required: true
+    // },
     bgColor: {
       type: String,
       default: 'success'
@@ -84,3 +88,8 @@
   })
 
 </script>
+<style scoped>
+.my-input {
+  margin-bottom: 1rem;
+}
+</style>
