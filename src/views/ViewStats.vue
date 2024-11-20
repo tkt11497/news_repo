@@ -9,7 +9,7 @@
       </thead>
       <tbody>
         <tr>
-          <td>Number of Notes</td>
+          <td>Number of Links</td>
           <td>{{ storeNotes.totalNotesCount }}</td>
         </tr>
         <tr>
@@ -18,13 +18,7 @@
         </tr>
       </tbody>
     </table>
-    <input
-      v-model="loveNoteballs"
-      class="input"
-      type="text"
-      placeholder="Do you love noteballs??"
-      v-autofocus
-    />
+
   </div>
 </template>
 

@@ -3,10 +3,11 @@
     class="card mb-4"
   >
     <div class="card-content">
+      <p v-if="isCurrent==0" class="title">Current Download Links</p>
+      <p v-else class="title">Record of Download Links</p>
       <div class="content">
-       <p>Title: {{ note.title }}</p>
-       <p>Writer: {{ note.writer }}</p>
-       <p>Content: {{ note.content }}</p>
+       <p>IOS Link: {{ note.iosLink }}</p>
+       <p>Android Link: {{ note.androidLink }}</p>
         <div class="columns is-mobile has-text-grey-light mt-2">
           <small class="column">{{ formattedDate }}</small>
           <small class="column has-text-right">{{ characterLength }}</small>
@@ -14,13 +15,13 @@
       </div>
     </div>
     <footer class="card-footer">
-      <RouterLink
+      <!-- <RouterLink
         :to="`/editNote/${ note.id }`"
         class="card-footer-item"
         href="#"
       >
         Edit
-      </RouterLink>
+      </RouterLink> -->
       <a
         @click.prevent="modals.deleteNote = true"
         class="card-footer-item"
@@ -51,6 +52,10 @@
     note: {
       type: Object,
       required: true
+    },
+    isCurrent: {
+      type: Number,
+      required: true
     }
   })
   const formattedDate = computed(() =>{
@@ -68,7 +73,7 @@
 */
 
   const characterLength = computed(() => {
-    let length = props.note.content.length
+    let length = props.note.iosLink.length
     let description = length > 1 ? 'characters' : 'character'
     return `${ length } ${ description }`
   })
@@ -82,3 +87,8 @@
   })
 
 </script>
+<style scoped>
+  .title{
+    font-size: 1.2rem;
+  }
+</style>

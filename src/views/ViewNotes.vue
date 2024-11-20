@@ -2,28 +2,28 @@
   <div class="notes">
 
     <AddEditNote
-      v-model:content="newNote.content"
-      v-model:title="newNote.title"
-      v-model:writer="newNote.writer"
+      v-model:iosLink="newNote.iosLink"
+      v-model:androidLink="newNote.androidLink"
       placeholder="Add a new note"
       ref="addEditNoteRef"
     >
       <template #buttons>
         <button
           @click="addNote"
-          :disabled="!newNote.content"
+          :disabled="!newNote.iosLink || !newNote.androidLink"
           class="button is-link has-background-success"
         >
-          Add New Note
+          Add New Link
         </button>
       </template>
     </AddEditNote>
     <progress v-if="storeNotes.notesloading" class="progress is-large is-success" max="100"></progress>
     <template v-else>
       <Note
-        v-for="note in storeNotes.notes"
+        v-for="(note,index) in storeNotes.notes"
       :key="note.id"
         :note="note"
+        :isCurrent="index"
       />
     </template>
     <div 
@@ -63,12 +63,12 @@ const storeNotes = useStoreNotes()
   notes
 */
 
-const newNote = ref({content:'',title:'',writer:''})
+const newNote = ref({iosLink:'',androidLink:''})
   const addEditNoteRef = ref(null)
 
   const addNote = () => {
     storeNotes.addNote(newNote.value)
-    newNote.value = {content:'',title:'',writer:''}
+    newNote.value = {iosLink:'',androidLink:''}
     addEditNoteRef.value.focusTextarea()
   }
 
@@ -76,6 +76,7 @@ const newNote = ref({content:'',title:'',writer:''})
   watch characters
 */
 
-  useWatchCharacters(()=>newNote.value.content)
+  useWatchCharacters(()=>newNote.value.iosLink)
+  // useWatchCharacters(()=>newNote.value.androidLink)
 
 </script>

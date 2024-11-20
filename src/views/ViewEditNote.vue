@@ -1,9 +1,8 @@
 <template>
   <div class="edit-note">
     <AddEditNote
-      v-model:content="noteContent.content"
-      v-model:title="noteContent.title"
-      v-model:writer="noteContent.writer"
+      v-model:iosLink="noteContent.iosLink"
+      v-model:androidLink="noteContent.androidLink"
       bgColor="link"
       placeholder="Edit note"
       label="Edit Note"
@@ -19,7 +18,7 @@
         <button
           @click="handleSaveClicked"
           class="button is-link has-background-link"
-          :disabled="!noteContent.content"
+          :disabled="!noteContent.iosLink || !noteContent.androidLink"
         >
           Save Note
         </button>
@@ -57,7 +56,7 @@
   note
 */
 
-  const noteContent = ref({content:'',title:'',writer:''})
+  const noteContent = ref({iosLink:'',androidLink:''})
   const {notes}= storeToRefs(storeNotes)
   const getNote_reload = async ()=>{
     if(notes.value.length === 0){

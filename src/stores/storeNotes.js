@@ -99,7 +99,7 @@ export const useStoreNotes = defineStore('storeNotes', {
     totalCharactersCount: (state) => {
       let count = 0
       state.notes.forEach(note => {
-        count += note.content.length
+        count += note.iosLink.length + note.androidLink.length
       })
       return count
     }

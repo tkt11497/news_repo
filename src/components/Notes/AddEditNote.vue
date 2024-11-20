@@ -12,16 +12,16 @@
 
     <div class="field">
       <div class="control">
-        <input class="input my-input" type="text" placeholder="news title" v-model="title">
-        <input class="input my-input" type="text" placeholder="news writer name" v-model="writer">
-        <textarea
+        <input class="input my-input" ref="iosLinkRef" type="text" placeholder="IOS Link" v-model="iosLink"  v-autofocus>
+        <input class="input my-input" ref="androidLinkRef" type="text" placeholder="Android Link" v-model="androidLink">
+        <!-- <textarea
           v-model="content"
           class="textarea"
           :placeholder="placeholder"
           ref="textareaRef"
           maxlength="200"
           v-autofocus
-        />
+        /> -->
       </div>
     </div>
 
@@ -47,8 +47,8 @@
   props
 */
   const content = defineModel('content', { required: true })
-  const title = defineModel('title', { required: true })
-  const writer = defineModel('writer', { required: true })
+  const iosLink = defineModel('iosLink', { required: true })
+  const androidLink = defineModel('androidLink', { required: true })
   const props = defineProps({
     // modelValue: {
     //   type: String,
