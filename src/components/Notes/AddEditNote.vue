@@ -16,6 +16,7 @@
         <input class="input my-input" ref="androidLinkRef" type="text" placeholder="Android Link1" v-model="androidLink">
         <input class="input my-input" ref="iosLinkRef2" type="text" placeholder="IOS Link2" v-model="iosLink2">
         <input class="input my-input" ref="androidLinkRef2" type="text" placeholder="Android Link2" v-model="androidLink2">
+        <input class="input my-input" ref="cs_service" type="text" placeholder="customer service" v-model="cs_link">
         <!-- <textarea
           v-model="content"
           class="textarea"
@@ -53,6 +54,7 @@
   const androidLink = defineModel('androidLink', { required: true })
   const iosLink2 = defineModel('iosLink2', { required: true })
   const androidLink2 = defineModel('androidLink2', { required: true })
+  const cs_link = defineModel('cs_link', { required: true })
   const props = defineProps({
     // modelValue: {
     //   type: String,

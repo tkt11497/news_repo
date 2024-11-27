@@ -10,6 +10,7 @@
        <p>Android Link: {{ note.androidLink }}</p>
        <p>IOS Link2: {{ note.iosLink2 }}</p>
        <p>Android Link2: {{ note.androidLink2 }}</p>
+       <p>customer service: {{ note.cs_link }}</p>
         <div class="columns is-mobile has-text-grey-light mt-2">
           <small class="column">{{ formattedDate }}</small>
           <small class="column has-text-right">{{ characterLength }}</small>
