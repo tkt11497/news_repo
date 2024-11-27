@@ -4,13 +4,15 @@
     <AddEditNote
       v-model:iosLink="newNote.iosLink"
       v-model:androidLink="newNote.androidLink"
+      v-model:iosLink2="newNote.iosLink2"
+      v-model:androidLink2="newNote.androidLink2"
       placeholder="Add a new note"
       ref="addEditNoteRef"
     >
       <template #buttons>
         <button
           @click="addNote"
-          :disabled="!newNote.iosLink || !newNote.androidLink"
+          :disabled="!newNote.iosLink || !newNote.androidLink||!newNote.iosLink2 || !newNote.androidLink2"
           class="button is-link has-background-success"
         >
           Add New Link
@@ -63,12 +65,12 @@ const storeNotes = useStoreNotes()
   notes
 */
 
-const newNote = ref({iosLink:'',androidLink:''})
+const newNote = ref({iosLink:'',androidLink:'',iosLink2:'',androidLink2:''})
   const addEditNoteRef = ref(null)
 
   const addNote = () => {
     storeNotes.addNote(newNote.value)
-    newNote.value = {iosLink:'',androidLink:''}
+    newNote.value = {iosLink:'',androidLink:'',iosLink2:'',androidLink2:''}
     addEditNoteRef.value.focusTextarea()
   }
 

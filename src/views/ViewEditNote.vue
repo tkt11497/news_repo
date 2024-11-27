@@ -3,6 +3,8 @@
     <AddEditNote
       v-model:iosLink="noteContent.iosLink"
       v-model:androidLink="noteContent.androidLink"
+      v-model:iosLink2="noteContent.iosLink2"
+      v-model:androidLink2="noteContent.androidLink2"
       bgColor="link"
       placeholder="Edit note"
       label="Edit Note"
@@ -56,7 +58,7 @@
   note
 */
 
-  const noteContent = ref({iosLink:'',androidLink:''})
+  const noteContent = ref({iosLink:'',androidLink:'',iosLink2:'',androidLink2:''})
   const {notes}= storeToRefs(storeNotes)
   const getNote_reload = async ()=>{
     if(notes.value.length === 0){

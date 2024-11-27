@@ -12,8 +12,10 @@
 
     <div class="field">
       <div class="control">
-        <input class="input my-input" ref="iosLinkRef" type="text" placeholder="IOS Link" v-model="iosLink"  v-autofocus>
-        <input class="input my-input" ref="androidLinkRef" type="text" placeholder="Android Link" v-model="androidLink">
+        <input class="input my-input" ref="iosLinkRef" type="text" placeholder="IOS Link1" v-model="iosLink"  v-autofocus>
+        <input class="input my-input" ref="androidLinkRef" type="text" placeholder="Android Link1" v-model="androidLink">
+        <input class="input my-input" ref="iosLinkRef2" type="text" placeholder="IOS Link2" v-model="iosLink2">
+        <input class="input my-input" ref="androidLinkRef2" type="text" placeholder="Android Link2" v-model="androidLink2">
         <!-- <textarea
           v-model="content"
           class="textarea"
@@ -49,6 +51,8 @@
   const content = defineModel('content', { required: true })
   const iosLink = defineModel('iosLink', { required: true })
   const androidLink = defineModel('androidLink', { required: true })
+  const iosLink2 = defineModel('iosLink2', { required: true })
+  const androidLink2 = defineModel('androidLink2', { required: true })
   const props = defineProps({
     // modelValue: {
     //   type: String,
